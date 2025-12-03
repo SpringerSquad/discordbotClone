@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}SpringerPanel{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-bar">
+      <div class="nav-left">
+        {# Branding: NUR Admin sieht "Admin-Bereich" #}
+        {% if request.session.get('logged_in') and request.session.get('role') == 'admin' %}
+          <a class="nav-brand" href="/admin/menu">Admin-Bereich</a>
+        {% endif %}
+
+        {# Branding: NUR Support sieht "Support-Bereich" #}
+        {% if request.session.get('logged_in') and request.session.get('role') == 'support' %}
+          <a class="nav-brand" href="/support/menu">Support-Bereich</a>
+        {% endif %}
+
+        {# Dashboard ist für alle sichtbar #}
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+        <a class="nav-link" href="/admin/absences">Abwesenheiten</a>  {# ⬅️ NEU #}
+        <a class="nav-link" href="/admin/training">R6 Training</a>
+
+        {# R6 AVG: erlaubt, wenn User in Whitelist ODER admin/support #}
+        {% set __user = request.session.get('username') %}
+        {% set __allowed = (settings.get('allowed_member_usernames', []) if settings else []) %}
+        {% if request.session.get('logged_in') and (__user in __allowed or request.session.get('role') in ['admin','support']) %}
+          <a class="nav-link" href="/member/form">R6 AVG</a>
+          <a class="nav-link" href="/admin/tickets">Tickets</a>
+        {% endif %}
+      </div>
+
+      <div class="nav-right">
+        {% if request.session.get('logged_in') %}
+          <span class="nav-user">Hi, {{ request.session.get('username') }}</span>
+          <a class="nav-link" href="/account">Konto</a>
+          <a class="nav-link logout" href="/logout">Logout</a>
+        {% else %}
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/register">Registrieren</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    &copy; {{ now().year }} Springer-Adminpanel (v0.9) – Made with ❤️ by Springer | Multigaming
+  </footer>
+</body>
+</html>

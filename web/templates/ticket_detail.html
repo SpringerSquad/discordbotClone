@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">🎫 Ticket-Details</h1>
+<p class="mb-2">Angemeldet als: <strong>{{ user }}</strong></p>
+<p><a href="/admin/tickets" class="text-blue-600 hover:underline">← zurück</a></p>
+<div class="bg-white shadow rounded p-4 mt-4">
+  <dl class="space-y-3">
+    <div><dt class="font-medium">ID:</dt><dd>{{ ticket.ticket_id }}</dd></div>
+    <div><dt class="font-medium">User:</dt><dd>{{ ticket.user }} (ID: {{ ticket.user_id }})</dd></div>
+    <div><dt class="font-medium">Kategorie:</dt><dd>{{ ticket.category }}</dd></div>
+    <div><dt class="font-medium">Status:</dt><dd>{{ ticket.status }}</dd></div>
+    <div><dt class="font-medium">Erstellt:</dt><dd>{{ ticket.created }}</dd></div>
+    <div><dt class="font-medium">Channel-ID:</dt><dd>{{ ticket.channel_id }}</dd></div>
+  </dl>
+</div>
+{% endblock %}

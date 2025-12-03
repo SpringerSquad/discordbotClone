@@ -1,0 +1,432 @@
+[
+    {
+        "time": "2025-07-31T16:35:11.990937",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 26,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "t5",
+            "channel_id": 1400517159335104533,
+            "created_at": "2025-07-31T16:35:11.331683"
+        }
+    },
+    {
+        "time": "2025-07-31T17:25:35.313203",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 27,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Support",
+            "channel_id": 1400529840561586257,
+            "created_at": "2025-07-31T17:25:34.705317"
+        }
+    },
+    {
+        "time": "2025-07-31T17:37:13.300719",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 28,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Technik",
+            "channel_id": 1400532766453403768,
+            "created_at": "2025-07-31T17:37:12.360591"
+        }
+    },
+    {
+        "time": "2025-07-31T17:45:15.585786",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 29,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Support",
+            "channel_id": 1400534790918111272,
+            "created_at": "2025-07-31T17:45:14.950344"
+        }
+    },
+    {
+        "time": "2025-07-31T17:45:24.309549",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-29",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400534790918111272
+        }
+    },
+    {
+        "time": "2025-07-31T17:46:08.372310",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "29",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-07-31T17:46:08.372310",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-horstalpard-29",
+            "user_id": 1223239200766431254,
+            "channel_id": 1400534790918111272,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-07-31T17:48:43.525415",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 30,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Technik",
+            "channel_id": 1400535663136473109,
+            "created_at": "2025-07-31T17:48:42.916095"
+        }
+    },
+    {
+        "time": "2025-07-31T17:48:51.858315",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-30",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400535663136473109
+        }
+    },
+    {
+        "time": "2025-07-31T17:48:58.726236",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "30",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-07-31T17:48:58.741860",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-horstalpard-30",
+            "user_id": 1223239200766431254,
+            "channel_id": 1400535663136473109,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-07-31T17:49:10.622384",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "30",
+            "new_status": "offen"
+        }
+    },
+    {
+        "time": "2025-07-31T17:49:10.638009",
+        "event_type": "ticket_reopened",
+        "data": {
+            "channel_name": "geschlossen-ticket-horstalpard-30",
+            "user_id": 1223239200766431254,
+            "channel_id": 1400535663136473109,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-07-31T17:51:27.870121",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 31,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Technik",
+            "channel_id": 1400536351505387681,
+            "created_at": "2025-07-31T17:51:27.120155"
+        }
+    },
+    {
+        "time": "2025-07-31T17:51:33.670495",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-31",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400536351505387681
+        }
+    },
+    {
+        "time": "2025-07-31T17:53:06.160317",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 32,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Support",
+            "channel_id": 1400536764380217434,
+            "created_at": "2025-07-31T17:53:05.498136"
+        }
+    },
+    {
+        "time": "2025-07-31T17:53:13.017316",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-32",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400536764380217434
+        }
+    },
+    {
+        "time": "2025-07-31T17:53:20.635335",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "32",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-07-31T17:53:20.635335",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-horstalpard-32",
+            "user_id": 1223239200766431254,
+            "channel_id": 1400536764380217434,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-07-31T17:56:32.145082",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 33,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Support",
+            "channel_id": 1400537628729671781,
+            "created_at": "2025-07-31T17:56:31.567008"
+        }
+    },
+    {
+        "time": "2025-07-31T17:56:37.478236",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-33",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400537628729671781
+        }
+    },
+    {
+        "time": "2025-07-31T17:56:49.289416",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "33",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-07-31T17:56:49.306547",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-horstalpard-33",
+            "user_id": 1223239200766431254,
+            "channel_id": 1400537628729671781,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-07-31T18:01:25.392395",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 34,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Support",
+            "channel_id": 1400538858579427398,
+            "created_at": "2025-07-31T18:01:24.798696"
+        }
+    },
+    {
+        "time": "2025-07-31T18:01:30.141713",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-34",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400538858579427398
+        }
+    },
+    {
+        "time": "2025-07-31T18:01:41.488143",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-34",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400538858579427398
+        }
+    },
+    {
+        "time": "2025-07-31T18:01:49.340061",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "34",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-07-31T18:01:49.355685",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-horstalpard-34",
+            "user_id": 1223239200766431254,
+            "channel_id": 1400538858579427398,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-07-31T18:08:39.748663",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 35,
+            "user": "horstalpard",
+            "user_id": 1223239200766431254,
+            "category": "Support",
+            "channel_id": 1400540680203534336,
+            "created_at": "2025-07-31T18:08:39.170004"
+        }
+    },
+    {
+        "time": "2025-07-31T18:08:43.696410",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-horstalpard-35",
+            "user_id": 1223239200766431254,
+            "username": "Horst Alpard",
+            "channel_id": 1400540680203534336
+        }
+    },
+    {
+        "time": "2025-07-31T18:08:59.261065",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "35",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-07-31T18:08:59.276689",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-horstalpard-35",
+            "user_id": 1223239200766431254,
+            "channel_id": 1400540680203534336,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-08-22T20:35:31.297508",
+        "event_type": "ticket_created",
+        "data": {
+            "ticket_id": 36,
+            "user": "moneyboylover",
+            "user_id": 967438726689091655,
+            "category": "Support",
+            "channel_id": 1408550171641380967,
+            "created_at": "2025-08-22T20:35:30.718642"
+        }
+    },
+    {
+        "time": "2025-08-22T20:35:43.713431",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-moneyboylover-36",
+            "user_id": 967438726689091655,
+            "username": "Leon",
+            "channel_id": 1408550171641380967
+        }
+    },
+    {
+        "time": "2025-08-22T20:36:09.622034",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "36",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-08-22T20:36:09.640028",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-moneyboylover-36",
+            "user_id": 967438726689091655,
+            "channel_id": 1408550171641380967,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-08-22T20:36:24.898083",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "36",
+            "new_status": "offen"
+        }
+    },
+    {
+        "time": "2025-08-22T20:36:24.910079",
+        "event_type": "ticket_reopened",
+        "data": {
+            "channel_name": "geschlossen-ticket-moneyboylover-36",
+            "user_id": 967438726689091655,
+            "channel_id": 1408550171641380967,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-08-22T20:36:32.482625",
+        "event_type": "ticket_created",
+        "data": {
+            "channel_name": "ticket-moneyboylover-36",
+            "user_id": 967438726689091655,
+            "username": "Leon",
+            "channel_id": 1408550171641380967
+        }
+    },
+    {
+        "time": "2025-08-22T20:46:09.798135",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "36",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-08-22T20:46:09.814130",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-moneyboylover-36",
+            "user_id": 967438726689091655,
+            "channel_id": 1408550171641380967,
+            "reason": null
+        }
+    },
+    {
+        "time": "2025-08-22T20:46:09.835123",
+        "event_type": "ticket_status_updated",
+        "data": {
+            "ticket_id": "36",
+            "new_status": "geschlossen"
+        }
+    },
+    {
+        "time": "2025-08-22T20:46:09.847119",
+        "event_type": "ticket_closed",
+        "data": {
+            "channel_name": "ticket-moneyboylover-36",
+            "user_id": 967438726689091655,
+            "channel_id": 1408550171641380967,
+            "reason": null
+        }
+    }
+]

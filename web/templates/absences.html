@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Abwesenheiten{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="text-2xl font-bold mb-6">Abwesenheiten</h2>
+
+  <div class="card">
+    <h3 class="text-xl font-semibold mb-3">Abwesenheit einreichen</h3>
+    <form method="post" action="/admin/absences">
+      <div class="grid">
+        <div>
+          <label for="user_display">Mitglied / Anzeigename</label>
+          <input type="text" id="user_display" name="user_display" placeholder="z. B. Tari | Springer Squad" required />
+        </div>
+        <div>
+          <label for="start_date">Von</label>
+          <input type="date" id="start_date" name="start_date" required />
+        </div>
+        <div>
+          <label for="end_date">Bis</label>
+          <input type="date" id="end_date" name="end_date" required />
+        </div>
+        <div class="col-span-2">
+          <label for="reason">Grund (optional)</label>
+          <textarea id="reason" name="reason" rows="3" placeholder="Kurzbeschreibung (Urlaub, Prüfung, Krankheit, etc.)"></textarea>
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-3">
+        <button class="btn btn-primary" type="submit">Speichern</button>
+        <a class="btn" href="/admin/absences">Zurücksetzen</a>
+      </div>
+    </form>
+  </div>
+
+  {# ▼▼▼ Liste NUR für Admin/Support ▼▼▼ #}
+  {% if request.session.get('role') in ['admin', 'support'] %}
+  <div class="card mt-8">
+    <h3 class="text-xl font-semibold mb-3">Vorhandene Einträge</h3>
+    {% if absences and absences|length > 0 %}
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Mitglied</th>
+            <th>Zeitraum</th>
+            <th>Grund</th>
+            <th>Erstellt (UTC)</th>
+            <th>Gepostet?</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for it in absences %}
+          <tr>
+            <td>#{{ it.id }}</td>
+            <td>{{ it.user_display }}</td>
+            <td>{{ it.start_date }} – {{ it.end_date }}</td>
+            <td>{{ it.reason or "—" }}</td>
+            <td>{{ it.created_at }}</td>
+            <td>
+              {% if it.posted %}
+                ✅ {{ it.posted_at }}
+              {% else %}
+                ⏳ wartet
+              {% endif %}
+            </td>
+            <td>
+              <form method="post" action="/admin/absences/delete/{{ it.id }}" onsubmit="return confirm('Eintrag #{{ it.id }} wirklich löschen?');">
+                <button class="btn btn-danger" type="submit">Löschen</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <p class="muted">Noch keine Einträge.</p>
+    {% endif %}
+  </div>
+  {% else %}
+    <p class="muted mt-6">Deine Einreichung wird vom Team geprüft. Die Übersicht ist nur für Admins &amp; Support sichtbar.</p>
+  {% endif %}
+</div>
+{% endblock %}

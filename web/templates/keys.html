@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Registrierungs-Keys{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="text-2xl font-bold mb-4">Registrierungs-Keys</h2>
+
+  <div class="grid grid-2 gap-6">
+    <div class="card">
+      <h3 class="text-xl font-semibold mb-3">Neuen Key erzeugen</h3>
+      <form method="post" action="/admin/keys/create">
+        <label>Notiz (optional)</label>
+        <input type="text" name="note" placeholder="z. B. Einladung Team X">
+        <button class="btn btn-primary mt-2" type="submit">Key erzeugen</button>
+      </form>
+      <p class="muted mt-2">Keys sind <strong>Einmal-Keys</strong>. Nach Verwendung sind sie ungültig.</p>
+    </div>
+
+    <div class="card">
+      <h3 class="text-xl font-semibold mb-3">Alle Keys</h3>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Status</th>
+              <th>Erstellt von</th>
+              <th>Notiz</th>
+              <th>Erstellt (UTC)</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for k in keys %}
+            <tr>
+              <td><code>{{ k.code }}</code></td>
+              <td>
+                {% if k.revoked %}
+                  🔒 widerrufen
+                {% elif k.used %}
+                  ✅ verwendet von {{ k.used_by }}<br><small class="muted">{{ k.used_at }}</small>
+                {% else %}
+                  ⏳ offen
+                {% endif %}
+              </td>
+              <td>{{ k.created_by }}</td>
+              <td>{{ k.note or "—" }}</td>
+              <td>{{ k.created_at }}</td>
+              <td>
+                {% if not k.used and not k.revoked %}
+                <form method="post" action="/admin/keys/revoke" onsubmit="return confirm('Key wirklich widerrufen?');">
+                  <input type="hidden" name="code" value="{{ k.code }}">
+                  <button class="btn btn-danger" type="submit">Widerrufen</button>
+                </form>
+                {% else %}
+                  —
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+            {% if not keys or keys|length == 0 %}
+            <tr><td colspan="6" class="muted">Noch keine Keys.</td></tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  @media (max-width: 900px){ .grid-2 { grid-template-columns: 1fr; } }
+  .muted { color:#6b7280; }
+  input { width:100%; padding:.5rem; border:1px solid #ddd; border-radius:6px; margin-bottom:.6rem; }
+  .btn { border:none; padding:.45rem .8rem; border-radius:6px; cursor:pointer; background:#eee; }
+  .btn-primary { background:#007bff; color:#fff; }
+  .btn-danger { background:#dc3545; color:#fff; }
+</style>
+{% endblock %}

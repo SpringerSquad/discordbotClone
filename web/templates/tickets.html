@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <h2 class="text-center text-2xl font-bold mb-4">Ticketübersicht</h2>
+
+  {% if tickets %}
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-300 text-sm">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border px-4 py-2">Ticket-ID</th>
+          <th class="border px-4 py-2">User</th>
+          <th class="border px-4 py-2">Kategorie</th>
+          <th class="border px-4 py-2">Status</th>
+          <th class="border px-4 py-2">Erstellt am</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ticket in tickets %}
+        <tr class="hover:bg-gray-50">
+          <td class="border px-4 py-2">{{ ticket.id }}</td>
+          <td class="border px-4 py-2">{{ ticket.user }}</td>
+          <td class="border px-4 py-2">{{ ticket.category }}</td>
+          <td class="border px-4 py-2">{{ ticket.status }}</td>
+          <td class="border px-4 py-2">{{ ticket.created }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-center">Keine Tickets vorhanden.</p>
+  {% endif %}
+</div>
+{% endblock %}

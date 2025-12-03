@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="r6s-adt" class="tp-wrapper">
+  <header class="tp-header">
+    <h1>Advanced Tactical Discipline – Spieler-Handouts (3er Squads)</h1>
+    <p class="tp-subtitle">DESBL · Custom Game · Maps: Emerald Plains · Lair · Nighthaven Labs</p>
+
+    <div class="tp-toolbar no-print">
+      <button type="button" class="tp-btn" onclick="generatePDF()">📥 Gesamtes Handout als PDF</button>
+      <button type="button" class="tp-btn tp-btn-ghost" onclick="window.print()">🖨️ Drucken</button>
+    </div>
+
+    <nav class="tp-tabs no-print">
+      <button class="tp-tab tp-tab-active" data-target="#attack">⚔️ Attack (3 Spieler)</button>
+      <button class="tp-tab" data-target="#defense">🛡️ Defense (3 Spieler)</button>
+    </nav>
+  </header>
+
+  <!-- ATTACK -->
+  <section id="attack" class="tp-section tp-pane active">
+    <h2>⚔️ Attack Discipline – 3er Squad</h2>
+    <div class="tp-card">
+      <ul class="tp-list">
+        <li><strong>Rollen:</strong> Entry · Flex · Support/Hard Breach</li>
+        <li><strong>Ziel:</strong> Refrags & Utility-Chains: Flash → Nade → Breach → Smoke → Plant</li>
+        <li><strong>Maps:</strong> Emerald Plains · Lair · Nighthaven Labs</li>
+      </ul>
+    </div>
+
+    <article class="tp-card">
+      <div class="tp-card-head"><h3>Phasen (ca. 95–105 Min)</h3></div>
+      <ol class="tp-ol">
+        <li><strong>Warmup Calls (15)</strong> – Emerald: Terrace → Dining default (Call-Formel & Refrag-Timing)</li>
+        <li><strong>Entry & Refrag (25)</strong> – Lair: Warehouse → Server take (Doppel-Peek, Trade &lt; 1s)</li>
+        <li><strong>Utility & Execute (25)</strong> – Nighthaven: Server → Lab breach (Flash/Nade/Breach/Smoke/Plant)</li>
+        <li><strong>Midround Adapt (20)</strong> – Coach triggert Denial/Roam → Rotate/Tempo anpassen</li>
+        <li><strong>Post-Plant (15)</strong> – Bombenverteidigung: Angles, Info, Zeit</li>
+      </ol>
+    </article>
+
+    <article class="tp-card">
+      <div class="tp-card-head"><h3>IGL-Call-Formel (Kurz)</h3></div>
+      <ul class="tp-check">
+        <li><input type="checkbox"> <strong>Start:</strong> Entry-Point, Drohnen, HB-Ziel, Flankwatch</li>
+        <li><input type="checkbox"> <strong>Mid:</strong> Status Wall/Control, Utility-Status, 90/60/30 Zeit</li>
+        <li><input type="checkbox"> <strong>End:</strong> Execute-Call, Post-Plant-Aufgaben</li>
+      </ul>
+      <p class="tp-note">Beispiel: „Con smoke now – open wall – plant in 20“</p>
+    </article>
+
+    <article class="tp-card">
+      <div class="tp-card-head"><h3>Mini-Score (Auto-Summe)</h3></div>
+      <table class="tp-table" id="scoreAttack">
+        <thead>
+          <tr><th>Spieler</th><th>Calls</th><th>Trades</th><th>Utility</th><th>Tempo</th><th>Awareness</th><th>Summe</th><th>Notiz</th></tr>
+        </thead>
+        <tbody>
+          {% for i in range(1,4) %}
+          <tr>
+            <td contenteditable="true">Spieler {{ i }}</td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td class="sum">0</td>
+            <td contenteditable="true"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <!-- DEFENSE -->
+  <section id="defense" class="tp-section tp-pane">
+    <h2>🛡️ Defense Discipline – 3er Squad</h2>
+    <div class="tp-card">
+      <ul class="tp-list">
+        <li><strong>Rollen:</strong> Anchor · Flex/Info · Roamer</li>
+        <li><strong>Ziel:</strong> Layered Defense, Delay-Management, klare Retake-Calls</li>
+        <li><strong>Maps:</strong> Emerald Plains · Lair · Nighthaven Labs</li>
+      </ul>
+    </div>
+
+    <article class="tp-card">
+      <div class="tp-card-head"><h3>Phasen (ca. 95–105 Min)</h3></div>
+      <ol class="tp-ol">
+        <li><strong>Setup & Crossfire (20)</strong> – Emerald: CEO/Admin (Ankerpunkte, Rotations, Info-Linien)</li>
+        <li><strong>Delay & Info (25)</strong> – Lair: Server/Secure (ADS/Wamai staffeln, Sound nutzen)</li>
+        <li><strong>Retake & Trades (25)</strong> – Nighthaven: Lab/Server (Retake mit 2–3 → Trades erzwingen)</li>
+        <li><strong>Midround Crisis (20)</strong> – Coach triggert Fast Execute (Prioritäten/Calls testen)</li>
+        <li><strong>Review-Scrim (15)</strong> – Defense-bias Bo5 (Stabilität unter Druck)</li>
+      </ol>
+    </article>
+
+    <article class="tp-card">
+      <div class="tp-card-head"><h3>Defense-Checkliste (Kurz)</h3></div>
+      <ul class="tp-check">
+        <li><input type="checkbox"> Verstärkung/Rotations komplett, Crossfire definiert</li>
+        <li><input type="checkbox"> Utility gestaffelt (ADS/Wamai/Smoke/C4)</li>
+        <li><input type="checkbox"> Info-Kanäle offen (Cams, Sound, Flankwatch) · Retake-Plan ready</li>
+      </ul>
+    </article>
+
+    <article class="tp-card">
+      <div class="tp-card-head"><h3>Mini-Score (Auto-Summe)</h3></div>
+      <table class="tp-table" id="scoreDefense">
+        <thead>
+          <tr><th>Spieler</th><th>Setup</th><th>Delay</th><th>Trades</th><th>Calls</th><th>Awareness</th><th>Summe</th><th>Notiz</th></tr>
+        </thead>
+        <tbody>
+          {% for i in range(1,4) %}
+          <tr>
+            <td contenteditable="true">Spieler {{ i }}</td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td><input type="number" min="0" max="5" class="tp-inp score"></td>
+            <td class="sum">0</td>
+            <td contenteditable="true"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <div class="tp-footer-block">
+    <a href="#" class="tp-link no-print" onclick="generatePDF()">📥 PDF herunterladen</a>
+    <div class="tp-stamp">© {{ now().year }} Springer Multigaming · {{ now().strftime('%d.%m.%Y') }}</div>
+  </div>
+</div>
+
+<!-- html2pdf -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js" referrerpolicy="no-referrer"></script>
+<script>
+  // Tabs
+  document.addEventListener('click', (e) => {
+    if(e.target.matches('.tp-tab')){
+      document.querySelectorAll('.tp-tab').forEach(t=>t.classList.remove('tp-tab-active'));
+      e.target.classList.add('tp-tab-active');
+      const target = e.target.getAttribute('data-target');
+      document.querySelectorAll('.tp-pane').forEach(p=>p.classList.remove('active'));
+      document.querySelector(target).classList.add('active');
+    }
+  });
+
+  // Score Auto-Summen
+  function calcScores(tableId){
+    const rows = document.querySelectorAll(tableId + ' tbody tr');
+    rows.forEach(row => {
+      const inputs = row.querySelectorAll('input.score');
+      let sum = 0;
+      inputs.forEach(inp => sum += Number(inp.value || 0));
+      row.querySelector('.sum').textContent = sum;
+    });
+  }
+  document.addEventListener('input', (e) => {
+    if(e.target.matches('#scoreAttack input.score')) calcScores('#scoreAttack');
+    if(e.target.matches('#scoreDefense input.score')) calcScores('#scoreDefense');
+  });
+
+  // PDF Export
+  function generatePDF(){
+    calcScores('#scoreAttack'); calcScores('#scoreDefense');
+    const el = document.getElementById('r6s-adt');
+    const opt = {
+      margin:[10,10,12,10],
+      filename:'R6S_AdvancedTacticalDiscipline_Spielerhandouts.pdf',
+      image:{ type:'jpeg', quality:0.98 },
+      html2canvas:{ scale:2, useCORS:true },
+      jsPDF:{ unit:'mm', format:'a4', orientation:'portrait' },
+      pagebreak:{ mode:['css','legacy'] }
+    };
+    html2pdf().set(opt).from(el).save();
+  }
+</script>
+
+<!-- Styles -->
+<style>
+  .tp-wrapper{max-width:1000px;margin:0 auto;padding:24px 16px}
+  .tp-header{text-align:center;margin-bottom:12px}
+  .tp-subtitle{color:#555}
+  .tp-toolbar{display:flex;gap:8px;justify-content:center;margin-top:12px}
+  .tp-btn{border:1px solid #d0d0d0;background:#2b4c7e;color:#fff;padding:8px 12px;border-radius:6px;font-weight:600;cursor:pointer}
+  .tp-btn:hover{filter:brightness(1.05)}
+  .tp-btn-ghost{background:#f6f7f9;color:#333;border-color:#d0d0d0}
+  .tp-tabs{display:flex;gap:8px;justify-content:center;margin-top:14px}
+  .tp-tab{border:1px solid #d0d0d0;background:#f6f7f9;color:#333;padding:6px 10px;border-radius:999px;cursor:pointer}
+  .tp-tab-active{background:#2b4c7e;color:#fff;border-color:#2b4c7e}
+  .tp-pane{display:none}
+  .tp-pane.active{display:block}
+  .tp-section{margin-top:16px}
+  .tp-card{background:#fff;border:1px solid #e2e2e2;border-radius:10px;padding:12px;margin:10px 0}
+  .tp-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .tp-ol{margin:6px 0 0 22px}
+  .tp-list{margin:6px 0 0 20px}
+  .tp-check{margin:8px 0 0 0;list-style:none;padding-left:0}
+  .tp-check li{display:flex;gap:8px;margin:6px 0}
+  .tp-table{width:100%;border-collapse:collapse;font-size:15px}
+  .tp-table th,.tp-table td{border:1px solid #e2e2e2;padding:6px 8px;vertical-align:top}
+  .tp-table thead th{background:#f6f7f9}
+  .tp-inp{width:60px;padding:4px 6px;border:1px solid #d0d0d0;border-radius:6px}
+  .tp-note{color:#666;font-size:13px;margin-top:6px}
+  .tp-footer-block{display:flex;align-items:center;justify-content:space-between;margin:12px 2px}
+  .tp-link{color:#2b4c7e;text-decoration:none;font-weight:700}
+  .tp-link:hover{text-decoration:underline}
+  .tp-stamp{color:#666;font-size:13px}
+  @media print{.no-print{display:none!important}.tp-wrapper{padding:0}.tp-card{box-shadow:none;border-color:#cfcfcf}.tp-table thead th{background:#f2f2f2!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+{% endblock %}

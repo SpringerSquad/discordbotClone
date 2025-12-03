@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">🎟️ Alle Tickets</h1>
+<table class="min-w-full bg-white shadow rounded overflow-hidden">
+  <thead class="bg-gray-100">
+    <tr>
+      <th class="px-4 py-2 text-left">ID</th>
+      <th class="px-4 py-2 text-left">User</th>
+      <th class="px-4 py-2 text-left">Kategorie</th>
+      <th class="px-4 py-2 text-left">Status</th>
+      <th class="px-4 py-2 text-left">Erstellt (UTC)</th>
+      <th class="px-4 py-2 text-left">Aktionen</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in tickets %}
+    <tr class="border-b">
+      <td class="px-4 py-2">{{ t.ticket_id }}</td>
+      <td class="px-4 py-2">{{ t.user }}</td>
+      <td class="px-4 py-2">{{ t.category }}</td>
+      <td class="px-4 py-2">{{ t.status }}</td>
+      <td class="px-4 py-2">{{ t.created }}</td>
+      <td class="px-4 py-2">
+        <a href="/admin/tickets/{{ t.ticket_id }}" class="text-blue-600 hover:underline">Details</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="6" class="px-4 py-2 text-center text-gray-500">Keine Tickets.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

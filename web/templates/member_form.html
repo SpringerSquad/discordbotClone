@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block title %}Member-Formular{% endblock %}
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Eingabemaske für Member-Daten</h1>
+
+  {% if success %}
+    <div style="text-align:center; color:red; font-weight:bold; margin: 1em 0;">
+      Daten erfolgreich gespeichert.
+    </div>
+  {% endif %}
+
+  <form action="/member/form" method="post" class="form-card pretty-form" id="memberForm">
+    <div class="form-grid">
+      {# Spielername als Dropdown aus players.json #}
+      <div class="form-item">
+        <label for="spielername">Spielername *</label>
+        <select id="spielername" name="spielername" class="input" required>
+          {% for p in players %}
+            <option value="{{ p }}">{{ p }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      {# Restliche Basisfelder (aus headers), AUSGENOMMEN spezielle Felder #}
+      {% for h in headers %}
+        {% set name = h.name %}
+        {% set label = h.label %}
+        {% set type  = h.type or 'text' %}
+        {% set req   = 'required' if h.required else '' %}
+        {% set is_avg = name in ['avg_zielgenauigkeit','avg_map_kenntnis','avg_teamplay','avg_kommunikation','avg_reaktionszeit','gesamt_avg'] %}
+        {% if not is_avg and name not in ['spielername','sondertag','abwesend_gemeldet','sieben_tage_durchschnitt'] %}
+          <div class="form-item">
+            <label for="{{ name }}">{{ label }}{% if h.required %} *{% endif %}</label>
+
+            {% if type == 'textarea' %}
+              <textarea id="{{ name }}" name="{{ name }}" class="input" {{ req }}></textarea>
+            {% elif type == 'select' %}
+              <select id="{{ name }}" name="{{ name }}" class="input" {{ req }}>
+                {% for opt in h.options or [] %}<option value="{{ opt }}">{{ opt }}</option>{% endfor %}
+              </select>
+            {% elif type == 'number' and '(%)' in (label or '') %}
+              <div class="input-suffix">
+                <input id="{{ name }}" name="{{ name }}" type="number" class="input" {{ req }}
+                       {% if h.min is defined %}min="{{ h.min }}"{% else %}min="0"{% endif %}
+                       {% if h.max is defined %}max="{{ h.max }}"{% else %}max="100"{% endif %}
+                       {% if h.step is defined %}step="{{ h.step }}"{% else %}step="0.1"{% endif %}>
+                <span class="suffix">%</span>
+              </div>
+            {% else %}
+              <input id="{{ name }}" name="{{ name }}" type="{{ type }}" class="input" {{ req }}>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {# Sondertag / Abwesend: nur Kästchen #}
+      <div class="form-item">
+        <label for="sondertag">Sondertag</label>
+        <input id="sondertag" name="sondertag" type="checkbox" value="1">
+      </div>
+
+      <div class="form-item">
+        <label for="abwesend_gemeldet">Abwesend gemeldet</label>
+        <input id="abwesend_gemeldet" name="abwesend_gemeldet" type="checkbox" value="1">
+      </div>
+
+      {# 7 Tage Durchschnitt: Anzeige, nicht editierbar #}
+		<div class="form-item">
+			<label for="sieben_tage_durchschnitt">7 Tage Durchschnitt</label>
+			<input id="sieben_tage_durchschnitt" type="text" class="input" value="–" disabled>
+			<small class="hint">
+				Wird automatisch geladen, sobald ein Spieler ausgewählt ist (berechnet aus 7 vorhandenen Einträgen).
+			</small>
+		</div>
+    </div>
+
+    <fieldset class="fieldset">
+      <legend>Performance‑AVG</legend>
+      <div class="form-grid">
+        {% for name,label in [
+          ('avg_zielgenauigkeit','AVG Zielgenauigkeit (%)'),
+          ('avg_map_kenntnis','AVG Map‑Kenntnis (%)'),
+          ('avg_teamplay','AVG Teamplay (%)'),
+          ('avg_kommunikation','AVG Kommunikation (%)'),
+          ('avg_reaktionszeit','AVG Reaktionszeit (%)')
+        ] %}
+          <div class="form-item">
+            <label for="{{ name }}">{{ label }} *</label>
+            <div class="input-suffix">
+              <input id="{{ name }}" name="{{ name }}" type="number" class="input avg-input"
+                     min="0" max="100" step="0.1" required>
+              <span class="suffix">%</span>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="form-item">
+          <label for="gesamt_avg">Gesamt AVG (%)</label>
+          <div class="input-suffix">
+            <input id="gesamt_avg" name="gesamt_avg" type="number" class="input" min="0" max="100" step="0.1" readonly>
+            <span class="suffix">%</span>
+          </div>
+          <small class="hint">Automatisch aus den fünf AVG‑Werten (nicht editierbar).</small>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit" class="btn">Absenden</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Live‑Berechnung Gesamt AVG (readOnly)
+  (function () {
+    const inputs = Array.from(document.querySelectorAll('.avg-input'));
+    const total  = document.getElementById('gesamt_avg');
+    function calc() {
+      const vals = inputs.map(i => parseFloat((i.value || '').replace(',', '.')))
+                         .filter(v => !isNaN(v));
+      if (vals.length === inputs.length) {
+        const avg = vals.reduce((a,b)=>a+b,0) / vals.length;
+        total.value = Math.round(avg * 10) / 10;
+      } else {
+        total.value = '';
+      }
+    }
+    inputs.forEach(i => i.addEventListener('input', calc));
+  })();
+</script>
+<script>
+  // Live-Berechnung Gesamt AVG (readOnly) – (falls noch nicht vorhanden, aus deiner aktuellen Version)
+  (function () {
+    const inputs = Array.from(document.querySelectorAll('.avg-input'));
+    const total  = document.getElementById('gesamt_avg');
+    function calc() {
+      const vals = inputs.map(i => parseFloat((i.value || '').replace(',', '.')))
+                         .filter(v => !isNaN(v));
+      if (vals.length === inputs.length) {
+        const avg = vals.reduce((a,b)=>a+b,0) / vals.length;
+        total.value = Math.round(avg * 10) / 10;
+      } else {
+        total.value = '';
+      }
+    }
+    inputs.forEach(i => i.addEventListener('input', calc));
+  })();
+
+  // Live-Lookup: 7-Tage-Durchschnitt beim Spielerwechsel
+  (function () {
+    const select = document.getElementById('spielername');
+    const out    = document.getElementById('sieben_tage_durchschnitt');
+
+    async function loadAvg7() {
+      if (!select || !out || !select.value) return;
+      out.value = 'lädt…';
+      try {
+        const res = await fetch(`/member/avg7?spielername=${encodeURIComponent(select.value)}`);
+        const data = await res.json();
+        if (data.ok && data.avg7 !== null) {
+          out.value = data.avg7 + ' %';
+        } else if (data.ok) {
+          // weniger als 7 Werte vorhanden
+          out.value = `noch nicht verfügbar (${data.count}/7)`;
+        } else {
+          out.value = 'Fehler';
+        }
+      } catch (e) {
+        out.value = 'Fehler';
+      }
+    }
+
+    if (select) {
+      select.addEventListener('change', loadAvg7);
+      // direkt beim Laden einmal abfragen (falls der erste Spieler vorausgewählt ist)
+      loadAvg7();
+    }
+  })();
+</script>
+{% endblock %}

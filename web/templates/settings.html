@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="settings-container">
+    <h2 class="text-2xl font-bold mb-4">Einstellungen</h2>
+
+    <div class="tab-buttons">
+        <button class="tab-button active" onclick="showTab('tab-kategorien', this)">Ticket-Kategorien</button>
+        <button class="tab-button" onclick="showTab('tab-rollen', this)">Rollen</button>
+        <button class="tab-button" onclick="showTab('tab-sonstiges', this)">Sonstiges</button>
+    </div>
+
+    <form method="post" class="settings-form">
+        <!-- Ticket-Kategorien -->
+        <div id="tab-kategorien" class="tab-content">
+            <label for="welcome_text">Begrüßungstext:</label>
+            <textarea name="welcome_text" id="welcome_text" rows="2">{{ settings.get('welcome_text', '') }}</textarea>
+
+            <label>Ticket-Kategorien:</label>
+            <div id="category-container" class="space-y-2 mb-4">
+                {% for category in settings.get('ticket_categories', []) %}
+                <div class="flex space-x-2 mb-1">
+                    <input type="text" name="ticket_categories" value="{{ category }}" class="w-full border rounded px-3 py-2" required>
+                    <button type="button" onclick="removeCategoryField(this)" class="btn btn-danger">❌</button>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="button" onclick="addCategoryField()" class="btn btn-primary mb-4">➕ Kategorie hinzufügen</button>
+        </div>
+
+        <!-- Rollen -->
+        <div id="tab-rollen" class="tab-content hidden">
+            <label class="role-heading">Admin-Rollen:</label>
+            <div class="roles-grid mb-4">
+                {% for role in all_roles %}
+                <label>
+                    <input type="checkbox" name="admin_roles" value="{{ role.id }}"
+                        {% if role.id in settings.get('admin_roles', []) %}checked{% endif %}>
+                    {{ role.name }}
+                </label>
+                {% endfor %}
+            </div>
+
+            <hr class="role-separator">
+
+            <label class="role-heading">Support-Rollen:</label>
+            <div class="roles-grid mb-4">
+                {% for role in all_roles %}
+                <label>
+                    <input type="checkbox" name="support_roles" value="{{ role.id }}"
+                        {% if role.id in settings.get('support_roles', []) %}checked{% endif %}>
+                    {{ role.name }}
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Sonstiges -->
+        <div id="tab-sonstiges" class="tab-content hidden">
+            <div class="misc-grid">
+                <div class="form-group">
+                    <label for="absence_channel_id">Abwesenheits-Channel-ID (Discord)</label>
+                    <input type="text" id="absence_channel_id" name="absence_channel_id"
+                           value="{{ settings.get('absence_channel_id', '') }}"
+                           placeholder="z. B. 123456789012345678" class="w-full border rounded px-3 py-2">
+                    <small class="hint">
+                        Trage hier die ID des Text-Channels ein, in den neue Abwesenheiten
+                        automatisch als Embed gepostet werden. Der Bot benötigt Schreibrechte &amp; „Embed Links“.
+                    </small>
+                </div>
+            </div>
+            <p class="muted mt-3">Hier kannst du zukünftig weitere Einstellungen vornehmen.</p>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-4">💾 Speichern</button>
+    </form>
+</div>
+
+<script>
+    function showTab(tabId, btnEl) {
+        const contents = document.querySelectorAll('.tab-content');
+        const buttons = document.querySelectorAll('.tab-button');
+        contents.forEach(c => c.classList.add('hidden'));
+        buttons.forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.remove('hidden');
+        if (btnEl) btnEl.classList.add('active');
+    }
+
+    function addCategoryField() {
+        const container = document.getElementById("category-container");
+        const div = document.createElement("div");
+        div.className = "flex space-x-2 mb-1";
+        div.innerHTML = `
+            <input type="text" name="ticket_categories" class="w-full border rounded px-3 py-2" required>
+            <button type="button" onclick="removeCategoryField(this)" class="btn btn-danger">❌</button>
+        `;
+        container.appendChild(div);
+    }
+
+    function removeCategoryField(button) {
+        button.parentElement.remove();
+    }
+</script>
+
+<style>
+    .settings-container {
+        max-width: 700px;
+        margin: auto;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .tab-buttons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .tab-button {
+        padding: 0.5rem 1rem;
+        border: none;
+        background-color: #eee;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .tab-button.active {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .tab-content.hidden {
+        display: none;
+    }
+
+    .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0.3rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .role-separator {
+        margin: 1rem 0;
+        border: none;
+        height: 1px;
+        background: #e5e7eb;
+    }
+
+    .btn {
+        border: none;
+        padding: 0.4rem 0.75rem;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    textarea, input[type="text"] {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+    }
+
+    .misc-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .hint {
+        display: block;
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+
+    .muted {
+        color: #6b7280;
+        font-size: 0.95rem;
+    }
+</style>
+{% endblock %}

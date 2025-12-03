@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Dokumente von {{ target_user.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Dokumente von {{ target_user.username }}</h1>
+
+  <p class="section-hint">
+    Als Admin kannst du hier alle Dokumente dieses Benutzers einsehen und bei Bedarf löschen.
+    Neue Dokumente lädt der Benutzer selbst über <strong>Konto → Meine Dokumente</strong> hoch.
+  </p>
+
+  <section class="account-section" style="margin-top: 16px;">
+    <h2>Vorhandene Dokumente</h2>
+
+    {% if documents and documents|length > 0 %}
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Datei</th>
+              <th>Hochgeladen am</th>
+              <th>Hochgeladen von</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for doc in documents %}
+              <tr>
+                <td>{{ doc.original_filename }}</td>
+                <td>
+                  {{ doc.uploaded_at.strftime('%d.%m.%Y %H:%M') if doc.uploaded_at else '-' }}
+                </td>
+                <td>{{ doc.uploaded_by }}</td>
+                <td>
+                  <a class="btn btn-small" href="/documents/{{ doc.id }}" target="_blank">Download</a>
+                  <form action="/admin/users/{{ target_user.id }}/documents/{{ doc.id }}/delete" method="post" style="display:inline;" onsubmit="return confirm('Dokument wirklich löschen?');">
+                    <button type="submit" class="btn btn-small btn-danger">Löschen</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>Für diesen Benutzer sind aktuell keine Dokumente hinterlegt.</p>
+    {% endif %}
+  </section>
+
+  <div style="margin-top: 24px;">
+    <a href="/admin/users" class="btn btn-secondary">Zurück zur Benutzerübersicht</a>
+  </div>
+</div>
+
+<style>
+  .account-section { margin-bottom: 1.5rem; }
+  .table-responsive { overflow-x:auto; }
+  .table { width:100%; border-collapse: collapse; }
+  .table th, .table td { padding: .5rem .6rem; border-bottom: 1px solid #e5e7eb; text-align:left; }
+  .btn { border: none; padding: .45rem .8rem; border-radius: 6px; cursor: pointer; background: #eee; text-decoration:none; display:inline-block; }
+  .btn-small { font-size: 0.875rem; padding: 0.35rem 0.6rem; }
+  .btn-danger { background:#dc3545; color:#fff; }
+  .btn-secondary { background:#6b7280; color:#fff; }
+  .section-hint { color:#6b7280; margin-bottom:.75rem; }
+</style>
+{% endblock %}

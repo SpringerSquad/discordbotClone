@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Konto{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Konto</h1>
+
+  {% if success %}
+    <div class="alert success">{{ success }}</div>
+  {% endif %}
+  {% if error %}
+    <div class="alert error">{{ error }}</div>
+  {% endif %}
+
+  <!-- Passwort ändern -->
+  <section class="account-section">
+    <h2>Passwort ändern</h2>
+
+    <form action="/account" method="post" class="form-card">
+      <div class="form-row">
+        <label for="current_password">Aktuelles Passwort</label>
+        <input id="current_password" name="current_password" type="password" class="input" required>
+      </div>
+
+      <div class="form-row">
+        <label for="new_password">Neues Passwort</label>
+        <input id="new_password" name="new_password" type="password" class="input" required>
+      </div>
+
+      <div class="form-row">
+        <label for="confirm_password">Passwort bestätigen</label>
+        <input id="confirm_password" name="confirm_password" type="password" class="input" required>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Speichern</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- GameKeys anzeigen -->
+  <section class="account-section" style="margin-top: 32px;">
+    <h2>Für dich hinterlegte GameKeys</h2>
+
+    {% if user.game_keys %}
+      <pre class="gamekeys-box">{{ user.game_keys }}</pre>
+    {% else %}
+      <p>Für dich sind aktuell keine GameKeys hinterlegt.</p>
+    {% endif %}
+  </section>
+
+  <!-- Dokumente -->
+  <section class="account-section" style="margin-top: 32px;">
+    <h2>Meine Dokumente</h2>
+    <p class="section-hint">
+      Hier kannst du eigene Dokumente hochladen und verwalten.
+      Nur du selbst und Admins können diese Dateien herunterladen.
+    </p>
+
+    <form action="/account/documents" method="post" enctype="multipart/form-data" class="form-card" style="max-width: 480px; margin-bottom: 20px;">
+      <div class="form-row">
+        <label for="file">Datei hochladen</label>
+        <input id="file" name="file" type="file" class="input" required>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn">Hochladen</button>
+      </div>
+    </form>
+
+    {% if documents and documents|length > 0 %}
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Datei</th>
+              <th>Hochgeladen am</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for doc in documents %}
+              <tr>
+                <td>{{ doc.original_filename }}</td>
+                <td>{{ doc.uploaded_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                <td>
+                  <a class="btn btn-small" href="/documents/{{ doc.id }}">Download</a>
+                  <form action="/account/documents/{{ doc.id }}/delete" method="post" style="display:inline;" onsubmit="return confirm('Dokument wirklich löschen?');">
+                    <button type="submit" class="btn btn-small btn-danger">Löschen</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>Aktuell sind keine Dokumente für dich hinterlegt.</p>
+    {% endif %}
+  </section>
+</div>
+
+<style>
+  .account-section { margin-bottom: 1.5rem; }
+  .form-card { background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .form-row { margin-bottom: .75rem; }
+  .form-row label { display:block; margin-bottom: .25rem; font-weight: 500; }
+  .input { width: 100%; padding: .5rem; border: 1px solid #ddd; border-radius: 6px; }
+  .form-actions { margin-top: .75rem; }
+  .btn { border: none; padding: .45rem .8rem; border-radius: 6px; cursor: pointer; background: #eee; text-decoration:none; display:inline-block; }
+  .btn-small { font-size: 0.875rem; padding: 0.35rem 0.6rem; }
+  .btn-danger { background:#dc3545; color:#fff; }
+  .table-responsive { overflow-x:auto; }
+  .table { width:100%; border-collapse: collapse; }
+  .table th, .table td { padding: .5rem .6rem; border-bottom: 1px solid #e5e7eb; text-align:left; }
+  .alert { padding: .6rem .9rem; border-radius: 6px; margin-bottom: .75rem; }
+  .alert.success { background: #e7f6ec; color: #256d3c; }
+  .alert.error { background: #fde8e8; color: #912d2d; }
+  .section-hint { color:#6b7280; margin-bottom:.75rem; }
+  .gamekeys-box { background:#f7f7f7; border:1px solid #ddd; padding:12px; border-radius:6px; white-space:pre-wrap; font-family:monospace; }
+</style>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}Support-Menü{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Support-Menü</h1>
+  <p>Hier findest du zentrale Support-Funktionen.</p>
+  <p>BEACHTE: Grafisch und Funktionell noch nicht Endgültig!</p>
+
+  <!-- Einheitliche Button-Leiste -->
+  <div class="button-group" style="display:flex; gap:12px; margin:16px 0 24px 0; flex-wrap:wrap;">
+    <a href="/admin/tickets" class="btn">Tickets</a>
+    <a href="/admin/settings" class="btn">Einstellungen</a>
+    <a href="/admin/keys" class="btn" >Register Keys</a>
+  </div>
+
+  <!-- Member-Daten Vorschau 
+  <section class="admin-section">
+    <h2>Member-Daten</h2>
+    {% if submissions and headers %}
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Eingereicht am (UTC)</th>
+              {% for h in headers %}
+                <th>{{ h.label }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in submissions %}
+              <tr>
+                <td>{{ row.id }}</td>
+                <td>{{ row.username }}</td>
+                <td>{{ row.submitted_at }}</td>
+                {% for h in headers %}
+                  <td>{{ row.data.get(h.name) }}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p>Keine Einträge vorhanden.</p>
+    {% endif %}
+  </section> --!
+
+  <!-- Tickets Kurznavigation -->
+  <section class="admin-section" style="margin-top:24px;">
+    <h2>Tickets</h2>
+    <a href="/admin/tickets" class="btn">Zur Ticketübersicht</a>
+  </section>
+</div>
+
+<script>
+function openTab(evt, tabId) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tab-content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    tabcontent[i].classList.remove("active");
+  }
+  tablinks = document.getElementsByClassName("tab-button");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+  document.getElementById(tabId).style.display = "block";
+  document.getElementById(tabId).classList.add("active");
+  if (evt && evt.currentTarget) evt.currentTarget.classList.add("active");
+}
+</script>
+{% endblock %}

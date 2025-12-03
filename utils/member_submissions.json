@@ -1,0 +1,242 @@
+[
+  {
+    "username": "Tari",
+    "submitted_at": "2025-08-23T18:01:51.297140Z",
+    "data": {
+      "spielername": "Tari",
+      "datum": "2025-08-23",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "70",
+      "avg_map_kenntnis": "70",
+      "avg_teamplay": "75",
+      "avg_kommunikation": "70",
+      "avg_reaktionszeit": "75",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "72.0",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 1
+  },
+  {
+    "username": "Goi",
+    "submitted_at": "2025-08-23T18:03:07.148101Z",
+    "data": {
+      "spielername": "Goi",
+      "datum": "2025-08-23",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "85",
+      "avg_map_kenntnis": "85",
+      "avg_teamplay": "75",
+      "avg_kommunikation": "80",
+      "avg_reaktionszeit": "80",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "81.0",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 2
+  },
+  {
+    "username": "Horst",
+    "submitted_at": "2025-08-23T18:04:09.116590Z",
+    "data": {
+      "spielername": "Horst",
+      "datum": "2025-08-23",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "65",
+      "avg_map_kenntnis": "80",
+      "avg_teamplay": "75",
+      "avg_kommunikation": "75",
+      "avg_reaktionszeit": "70",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "73.0",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 3
+  },
+  {
+    "username": "Tobi",
+    "submitted_at": "2025-08-23T18:04:57.209804Z",
+    "data": {
+      "spielername": "Tobi",
+      "datum": "2025-08-23",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "0",
+      "avg_map_kenntnis": "0",
+      "avg_teamplay": "0",
+      "avg_kommunikation": "0",
+      "avg_reaktionszeit": "0",
+      "sondertag": "0",
+      "abwesend_gemeldet": "1",
+      "kommentar": "",
+      "gesamt_avg": "",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 4
+  },
+  {
+    "username": "Yuki",
+    "submitted_at": "2025-08-23T18:05:22.060064Z",
+    "data": {
+      "spielername": "Yuki",
+      "datum": "2025-08-23",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "0",
+      "avg_map_kenntnis": "0",
+      "avg_teamplay": "0",
+      "avg_kommunikation": "0",
+      "avg_reaktionszeit": "0",
+      "sondertag": "0",
+      "abwesend_gemeldet": "1",
+      "kommentar": "",
+      "gesamt_avg": "",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 5
+  },
+  {
+    "username": "Max",
+    "submitted_at": "2025-08-23T18:06:13.664108Z",
+    "data": {
+      "spielername": "Max",
+      "datum": "2025-08-23",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "0",
+      "avg_map_kenntnis": "0",
+      "avg_teamplay": "0",
+      "avg_kommunikation": "0",
+      "avg_reaktionszeit": "0",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "ist nach 15 min gegangen.",
+      "gesamt_avg": "",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 6
+  },
+  {
+    "username": "Nanouk",
+    "submitted_at": "2025-08-23T18:26:22.656890Z",
+    "data": {
+      "spielername": "Nanouk",
+      "datum": "2025-08-23",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "55",
+      "avg_map_kenntnis": "80",
+      "avg_teamplay": "70",
+      "avg_kommunikation": "60",
+      "avg_reaktionszeit": "65",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "66.0",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 7
+  },
+  {
+    "username": "Nanouk",
+    "submitted_at": "2025-09-06T18:01:59.917109Z",
+    "data": {
+      "spielername": "Nanouk",
+      "datum": "2025-09-06",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "76",
+      "avg_map_kenntnis": "87",
+      "avg_teamplay": "73",
+      "avg_kommunikation": "75",
+      "avg_reaktionszeit": "78",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "77.8",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 8
+  },
+  {
+    "username": "Max",
+    "submitted_at": "2025-09-06T18:02:39.372315Z",
+    "data": {
+      "spielername": "Max",
+      "datum": "2025-09-06",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "25",
+      "avg_map_kenntnis": "12",
+      "avg_teamplay": "30",
+      "avg_kommunikation": "20",
+      "avg_reaktionszeit": "15",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "20.4",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 9
+  },
+  {
+    "username": "Tari",
+    "submitted_at": "2025-09-06T18:03:50.103779Z",
+    "data": {
+      "spielername": "Tari",
+      "datum": "2025-09-06",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "77",
+      "avg_map_kenntnis": "82",
+      "avg_teamplay": "80",
+      "avg_kommunikation": "72",
+      "avg_reaktionszeit": "78",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "77.8",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 10
+  },
+  {
+    "username": "Goi",
+    "submitted_at": "2025-09-06T18:04:24.579038Z",
+    "data": {
+      "spielername": "Goi",
+      "datum": "2025-09-06",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "88",
+      "avg_map_kenntnis": "87",
+      "avg_teamplay": "86",
+      "avg_kommunikation": "83",
+      "avg_reaktionszeit": "88",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "86.4",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 11
+  },
+  {
+    "username": "Yuki",
+    "submitted_at": "2025-09-06T20:55:48.836638Z",
+    "data": {
+      "spielername": "Yuki",
+      "datum": "2025-09-06",
+      "spieltyp": "Training",
+      "avg_zielgenauigkeit": "76",
+      "avg_map_kenntnis": "75",
+      "avg_teamplay": "78",
+      "avg_kommunikation": "1",
+      "avg_reaktionszeit": "78",
+      "sondertag": "0",
+      "abwesend_gemeldet": "0",
+      "kommentar": "",
+      "gesamt_avg": "61.6",
+      "sieben_tage_durchschnitt": ""
+    },
+    "id": 12
+  }
+]

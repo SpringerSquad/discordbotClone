@@ -1,0 +1,19 @@
+[
+  { "name": "spielername", "label": "Spielername", "type": "text", "required": true },
+  { "name": "datum", "label": "Datum", "type": "date", "required": true },
+  { "name": "spieltyp", "label": "Spieltyp", "type": "select", "required": true, "options": ["Training", "Match", "sonstiges(KommentarEintrag!"] },
+
+  { "name": "avg_zielgenauigkeit", "label": "AVG Zielgenauigkeit (%)", "type": "number", "required": true, "min": 0, "max": 100, "step": 1 },
+  { "name": "avg_map_kenntnis", "label": "AVG Map-Kenntnis (%)", "type": "number", "required": true, "min": 0, "max": 100, "step": 1 },
+  { "name": "avg_teamplay", "label": "AVG Teamplay (%)", "type": "number", "required": true, "min": 0, "max": 100, "step": 1},
+  { "name": "avg_kommunikation", "label": "AVG Kommunikation (%)", "type": "number", "required": true, "min": 0, "max": 100, "step": 1 },
+  { "name": "avg_reaktionszeit", "label": "AVG Reaktionszeit (%)", "type": "number", "required": true, "min": 0, "max": 100, "step": 1 },
+
+  { "name": "gesamt_avg", "label": "Gesamt AVG (%)", "type": "number", "required": false, "min": 0, "max": 100, "step": 1 },
+
+  { "name": "sondertag", "label": "Sondertag", "type": "checkbox", "required": false },
+  { "name": "abwesend_gemeldet", "label": "Abwesend gemeldet", "type": "checkbox", "required": false },
+  { "name": "sieben_tage_durchschnitt", "label": "7 Tage Durchschnitt", "type": "number", "required": false, "min": 0, "max": 100, "step": 1 },
+
+  { "name": "kommentar", "label": "Kommentar", "type": "textarea", "required": false }
+]

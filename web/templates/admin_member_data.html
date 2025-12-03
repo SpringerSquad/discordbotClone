@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Member‑Daten (nur Admin){% endblock %}
+
+{% block content %}
+<section class="card-panel">
+  <style>
+    .card-panel{background:#fff;border-radius:16px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+    .card-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+    .card-header h1{margin:0;font-size:1.6rem}
+    .tools{display:flex;gap:10px;flex-wrap:wrap}
+    .tools input[type="search"]{padding:10px 12px;border:1px solid #ddd;border-radius:10px;min-width:240px}
+
+    /* Kartenlayout – keine horizontale Scrollerei */
+    .submissions{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+    .submission{border:1px solid #ececec;border-radius:14px;padding:12px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    .submission header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px}
+    .submission h3{margin:0;font-size:1.05rem}
+    .badge{background:#eef2ff;color:#3b5bdb;font-weight:700;border-radius:999px;padding:4px 8px;font-size:.85rem}
+    .pills{display:flex;gap:6px;flex-wrap:wrap}
+    .pill{background:#f7f7f8;border:1px solid #eee;border-radius:999px;padding:4px 8px;font-size:.8rem}
+    .meta{color:#444;margin:.25rem 0 .5rem}
+    .ratings{display:grid;grid-template-columns:1fr 1fr;gap:6px;list-style:none;padding:0;margin:0}
+    .ratings li{border:1px dashed #eee;border-radius:10px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center}
+    .ratings b{font-variant-numeric:tabular-nums}
+    .empty{padding:20px;text-align:center;color:#777}
+
+    @media print{
+      .tools{display:none}
+      .submissions{grid-template-columns:1fr 1fr}
+      .card-panel{box-shadow:none;border:0;padding:0}
+    }
+  </style>
+
+  <div class="card-header">
+    <h1>Member‑Daten <small style="color:#666;font-weight:500">(nur Admin)</small></h1>
+    <div class="tools">
+      <input id="memberSearch" type="search" placeholder="Suchen (Name, Typ, Datum, Uhrzeit) …" />
+    </div>
+  </div>
+
+  <div id="submissions" class="submissions">
+    {# WICHTIG: wir nutzen 'submissions' aus dem Router und loop.index statt enumerate #}
+    {% for s in submissions %}
+    {% set d = s.data %}
+    <article class="submission"
+             data-search="{{ (d.spielername ~ ' ' ~ d.spieltyp ~ ' ' ~ d.datum ~ ' ' ~ s.submitted_at ~ ' ' ~ s.username)|lower }}">
+      <header>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="badge">#{{ loop.index }}</span>
+          <h3>{{ d.spielername }}</h3>
+        </div>
+        <div class="pills">
+          <span class="pill">{{ d.spieltyp }}</span>
+          <span class="pill">{{ d.datum }}</span>
+        </div>
+      </header>
+
+      <div class="meta">🕒 Eingereicht (UTC): <b>{{ s.submitted_at }}</b></div>
+
+      <ul class="ratings">
+        <li><span>🎯 Zielgenauigkeit </span><b> {{ d.avg_zielgenauigkeit }}% </b></li>
+        <li><span>🗺️ Map‑Kenntnis </span><b> {{ d.avg_map_kenntnis }}% </b></li>
+        <li><span>🤝 Teamplay </span><b> {{ d.avg_teamplay }}% </b></li>
+        <li><span>🎤 Kommunikation </span><b> {{ d.avg_kommunikation }}% </b></li>
+        {# optional weitere Felder, falls vorhanden: Reaktionszeit etc. #}
+        {% if d.avg_reaktionszeit is defined and d.avg_reaktionszeit != "" %}
+        <li><span⚡>⚡ Reaktionszeit </span><b> {{ d.avg_reaktionszeit }}% </b></li>
+        {% endif %}
+      </ul>
+    </article>
+    {% else %}
+      <div class="empty">Keine Einträge vorhanden.</div>
+    {% endfor %}
+  </div>
+
+  <script>
+    // einfache clientseitige Suche – keine Backend-/Datenänderungen nötig
+    (function(){
+      const input = document.getElementById('memberSearch');
+      const container = document.getElementById('submissions');
+      function filter(){
+        const term = (input.value || '').toLowerCase().trim();
+        const cards = Array.from(container.querySelectorAll('.submission'));
+        let any = false;
+        cards.forEach(el=>{
+          const show = el.dataset.search.includes(term);
+          el.style.display = show ? '' : 'none';
+          if (show) any = true;
+        });
+        let empty = container.querySelector('.empty');
+        if (!any && !empty){
+          empty = document.createElement('div');
+          empty.className = 'empty';
+          empty.textContent = 'Keine Einträge gefunden.';
+          container.appendChild(empty);
+        } else if (any && empty){
+          empty.remove();
+        }
+      }
+      input.addEventListener('input', filter);
+    })();
+  </script>
+</section>
+{% endblock %}

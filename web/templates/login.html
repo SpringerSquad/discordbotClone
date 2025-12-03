@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="page-title">Login</h1>
+
+  {% if error %}
+    <div class="alert error">{{ error }}</div>
+  {% endif %}
+
+  <form action="/login" method="post" class="form-card">
+    <input type="hidden" name="next" value="{{ request.query_params.get('next') or '' }}">
+    <div class="form-row">
+      <label for="username">Benutzername</label>
+      <input id="username" name="username" type="text" class="input" required>
+    </div>
+    <div class="form-row">
+      <label for="password">Passwort</label>
+      <input id="password" name="password" type="password" class="input" required>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn">Einloggen</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
