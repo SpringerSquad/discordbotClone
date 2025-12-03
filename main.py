@@ -267,6 +267,32 @@ async def change_password(
     return RedirectResponse(url="/account", status_code=HTTP_302_FOUND)
 
 
+@app.post("/account/accept_key")
+async def accept_game_key(
+    request: Request,
+    key: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    if not is_logged_in(request):
+        return RedirectResponse(url="/login?next=/account", status_code=HTTP_302_FOUND)
+
+    username = request.session.get("username")
+    user = db.query(User).filter_by(username=username).first()
+
+    if not user:
+        raise HTTPException(status_code=403, detail="Benutzer nicht gefunden")
+
+    if key not in user.game_keys:
+        raise HTTPException(status_code=400, detail="Ungültiger Key")
+
+    if key not in user.accepted_keys:
+        user.accepted_keys.append(key)
+        db.commit()
+
+    return RedirectResponse(url="/account", status_code=HTTP_302_FOUND)
+
+
+
 # 🔹 Dokument-Upload durch den Benutzer selbst
 @app.post("/account/documents", dependencies=[Depends(require_role(*ALL_ROLES))])
 async def upload_own_document(
